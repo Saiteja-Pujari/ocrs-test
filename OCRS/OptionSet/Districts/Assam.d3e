@@ -1,0 +1,103 @@
+(OptionSet AssamDistrict{
+    options[
+        (Baksa {
+
+        })
+        (Barpeta {
+
+        })
+        (Biswanath {
+
+        })
+        (Bongaigaon {
+
+        })
+        (Cachar {
+
+        })
+        (Charaideo {
+
+        })
+        (Chirang {
+
+        })
+        (Darrang {
+
+        })
+        (Dhemaji {
+
+        })
+        (Dhubri {
+
+        })
+        (Dibrugarh {
+
+        })
+        (DimaHasao {
+
+        })
+        (Goalpara {
+
+        })
+        (Golaghat {
+
+        })
+        (Hailakandi {
+
+        })
+        (Hojai {
+
+        })
+        (Jorhat {
+
+        })
+        (KamrupMetropolitan {
+
+        })
+        (Kamrup {
+
+        })
+        (KarbiAnglong {
+
+        })
+        (Karimganj {
+
+        })
+        (Kokrajhar {
+
+        })
+        (Lakhimpur {
+
+        })
+        (Majuli {
+
+        })
+        (Morigaon {
+
+        })
+        (Nagaon {
+
+        })
+        (Nalbari {
+
+        })
+        (Sivasagar {
+
+        })
+        (Sonitpur {
+
+        })
+        (SouthSalmaraMankachar{
+
+        })
+        (Tinsukia {
+
+        })
+        (Udalguri {
+
+        })
+        (WestKarbiAnglong{
+            
+        })
+    ]
+})

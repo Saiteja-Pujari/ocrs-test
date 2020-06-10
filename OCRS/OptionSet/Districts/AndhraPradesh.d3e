@@ -1,0 +1,43 @@
+(OptionSet AndhraDistrict{
+    options[
+        (Anantapur{
+
+        })
+        (Chittoor {
+
+        })
+        (EastGodavari {
+             
+        })
+        (Guntur {
+
+        })
+        (YSRKadapa {
+
+        })
+        (Krishna {
+
+        })
+        (Kurnool {
+
+        })
+        (Nellore {
+
+        })
+        (Prakasam {
+
+        })
+        (Srikakulam {
+
+        })
+        (Visakhapatnam {
+
+        })
+        (Vizianagaram {
+
+        })
+        (WestGodavari {
+            
+        })
+    ]
+})

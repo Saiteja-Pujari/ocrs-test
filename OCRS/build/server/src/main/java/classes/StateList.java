@@ -1,0 +1,33 @@
+package classes;
+
+public enum StateList {
+  AndhraPradesh,
+  ArunachalPradesh,
+  Assam,
+  Bihar,
+  Chhattisgarh,
+  Goa,
+  Gujarat,
+  Haryana,
+  HimachalPradesh,
+  JammuandKashmir,
+  Jharkhand,
+  Karnataka,
+  Kerala,
+  MadhyaPradesh,
+  Maharashtra,
+  Manipur,
+  Meghalaya,
+  Mizoram,
+  Nagaland,
+  Odisha,
+  Punjab,
+  Rajasthan,
+  Sikkim,
+  TamilNadu,
+  Telangana,
+  Tripura,
+  UttarPradesh,
+  Uttarakhand,
+  WestBengal;
+}

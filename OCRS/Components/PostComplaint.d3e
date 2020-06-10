@@ -1,0 +1,260 @@
+(Component PostComplaint{
+    properties [
+        (phonenumber{
+            type({
+                primitive String
+            })
+        })
+        (isNotValidPhoneNumber{
+            type({
+                primitive Boolean
+            })
+        })
+        (state{
+            type({
+                optionSet #StateList
+            })
+        })
+        (district{
+            type({
+                optionSet #District
+            })
+        })
+    ]
+    build(CRef id{
+        component #Center
+        child(CRef id{
+            component #SingleChildScrollView
+            data[
+                ({
+                    prop #padding
+                    type Compound
+                    compound ({
+                        struct #EdgeInsets
+                        values [
+                            ({
+                                prop #left
+                                value '40.0'
+                            })
+                            ({
+                                prop #right
+                                value '40.0'
+                            })
+                            ({
+                                prop #top
+                                value '40.0'
+                            })
+                            ({
+                                prop #bottom
+                                value '40.0'
+                            })
+                        ]
+                    })
+                })
+            ]
+            child(CRef id{
+                component #Column
+                data[
+                    ({
+                        prop #mainAxisAlignment
+                        value 'center'
+                    })
+                ]
+                child(CRef phone{
+                    component #TextField
+                    data[
+                        ({
+                            prop #inputDecoration
+                            type Compound
+                            compound ({
+                                struct #InputDecoration
+                                values[
+                                    ({
+                                        prop #labelText
+                                        value 'phonenumber'
+                                    })
+                                    ({
+                                        prop #errorText
+                                        type Bind
+                                        bindTo `isNotValidPhoneNumber ? 'Phonenumber Contains Exactly 10 digits' : null`
+                                    })
+                                ]
+                            })
+                        })
+                        ({
+                            prop #value
+                            type Bind
+                            bindTo `phonenumber`
+                        })
+                        ({
+                            event #onChanged
+                            type Bind
+                            bindTo `setSatePhoneNumber`
+                        })
+                        ({
+                            prop #constraints
+                            type Compound
+                            compound ({
+                                struct #BoxConstraints
+                                values [
+                                    ({
+                                        prop #minWidth
+                                        value '200'
+                                    })
+                                    ({
+                                        prop #maxWidth
+                                        value '400'
+                                    })
+                                ]
+                            })
+                        })
+                    ]
+                })
+                child(CRef row{
+                    component #Row
+                    data[
+                        ({
+                            prop #mainAxisAlignment
+                            value 'spaceEvenly'
+                        })
+                        ({
+                            prop #constraints
+                            type Compound 
+                            compound ({
+                                struct #BoxConstraints
+                                values[
+                                    ({
+                                        prop #minWidth
+                                        value '200'
+                                    })
+                                    ({
+                                        prop #maxWidth
+                                        value '400'
+                                    })
+                                ]
+                            })
+                        })
+                    ]
+                    children[
+                        (CRef dropdown{
+                            component #DropDown
+                            data[
+                                ({
+                                    prop #items
+                                    value 'T'
+                                })
+                                ({
+                                    prop #value
+                                    type Bind
+                                    bindTo `state`
+                                })
+                                ({
+                                    event #onChanged
+                                    type Bind
+                                    bindTo `setSateState`
+                                })
+                                ({
+                                    prop #constraints
+                                    type Compound
+                                    compound ({
+                                        struct #BoxConstraints
+                                        values [
+                                            ({
+                                                prop #minWidth
+                                                value '200'
+                                            })
+                                            ({
+                                                prop #maxWidth
+                                                value '400'
+                                            })
+                                        ]
+                                    })
+                                })
+                            ]
+                        })
+                        (CRef text{
+                            component #TextView
+                            data[
+                                ({
+                                    prop #data
+                                    value '  '
+                                })
+                            ]
+                        })
+                        (CRef dropdown1{
+                            component #DropDown
+                            data[
+                                ({
+                                    prop #items
+                                    value 'T'
+                                })
+                                ({
+                                    prop #value
+                                    type Bind
+                                    bindTo `district`
+                                })
+                                ({
+                                    event #onChanged
+                                    type Bind
+                                    bindTo `setSateDistrict`
+                                })
+                                ({
+                                    prop #constraints
+                                    type Compound
+                                    compound ({
+                                        struct #BoxConstraints
+                                        values [
+                                            ({
+                                                prop #minWidth
+                                                value '200'
+                                            })
+                                            ({
+                                                prop #maxWidth
+                                                value '400'
+                                            })
+                                        ]
+                                    })
+                                })
+                            ]
+                        })
+                    ]
+                })
+            })
+        })
+    })
+    eventHandlers[
+        (setSatePhoneNumber{
+            params[
+                (data{
+                    type({
+                        primitive String
+                    })
+                })
+            ]
+            block ```
+            ```
+        })
+        (setSateState{
+            params[
+                (data{
+                    type ({
+                        optionSet #StateList
+                    })
+                })
+            ]
+            block ```
+            ```
+        })
+        (setSateDistrict{
+            params[
+                (data{
+                    type ({
+                        optionSet #District
+                    })
+                })
+            ]
+            block ```
+            ```
+        })
+    ]
+})

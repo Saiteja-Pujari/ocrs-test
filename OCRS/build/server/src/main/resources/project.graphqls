@@ -1,0 +1,322 @@
+scalar Date
+
+scalar LocalDate
+
+scalar LocalDateTime
+
+scalar LocalTime
+
+scalar OffsetDateTime
+
+scalar ExpressionString
+
+scalar BlockString
+
+scalar Type
+
+scalar Duration
+
+schema
+{
+	query: Query
+	mutation: Mutation
+}
+
+union UserUnionX =  AnonymousUser
+
+type DFile
+{
+	name : String
+	id : String
+	size : Long
+}
+
+input DFileEntityInput
+{
+	name : String
+	id : String
+	size : Long
+}
+
+type LoginResult
+{
+	success : Boolean
+	token : String
+	failureMessage : String
+	userObject : UserUnionX
+}
+
+input ObjectRef
+{
+	id : Long
+	type : String
+}
+
+type Query
+{
+	getCustomerById ( id: Long ) : Customer
+	getAnonymousUserById ( id: Long ) : AnonymousUser
+	getEmailMessageById ( id: Long ) : EmailMessage
+	getOneTimePasswordById ( id: Long ) : OneTimePassword
+	checkOneTimePasswordTokenUnique ( id: Long name: String ) : Boolean
+	loginWithOTP ( token: String code: String ) : LoginResult
+}
+
+type Mutation
+{
+}
+
+type MutateOneTimePasswordResult
+{
+	status : MutateResultStatus
+	value : OneTimePassword
+	errors : [String]
+}
+
+type Subscription
+{
+	onCustomerChangeEvent : CustomerChangeEvent
+	onCustomerChangeEventById ( ids: [Long] ) : CustomerChangeEvent
+	onAnonymousUserChangeEvent : AnonymousUserChangeEvent
+	onAnonymousUserChangeEventById ( ids: [Long] ) : AnonymousUserChangeEvent
+	onEmailMessageChangeEvent : EmailMessageChangeEvent
+	onEmailMessageChangeEventById ( ids: [Long] ) : EmailMessageChangeEvent
+	onOneTimePasswordChangeEvent : OneTimePasswordChangeEvent
+	onOneTimePasswordChangeEventById ( ids: [Long] ) : OneTimePasswordChangeEvent
+	onUserChangeEvent : UserChangeEvent
+	onUserChangeEventById ( ids: [Long] ) : UserChangeEvent
+	onUserSessionChangeEvent : UserSessionChangeEvent
+	onUserSessionChangeEventById ( ids: [Long] ) : UserSessionChangeEvent
+}
+
+type CustomerChangeEvent
+{
+	model : Customer
+	changeType : ChangeEventType
+}
+
+type AnonymousUserChangeEvent
+{
+	model : AnonymousUser
+	changeType : ChangeEventType
+}
+
+type EmailMessageChangeEvent
+{
+	model : EmailMessage
+	changeType : ChangeEventType
+}
+
+type OneTimePasswordChangeEvent
+{
+	model : OneTimePassword
+	changeType : ChangeEventType
+}
+
+type UserChangeEvent
+{
+	model : UserUnionX
+	changeType : ChangeEventType
+}
+
+type UserSessionChangeEvent
+{
+	model : UserSession
+	changeType : ChangeEventType
+}
+
+type Customer
+{
+	id : Long
+	phonenumber : String
+	password : String
+}
+
+input CustomerEntityInput
+{
+	id : Long
+	phonenumber : String
+	password : String
+}
+
+type AnonymousUser
+{
+	id : Long
+	isActive : Boolean
+}
+
+input AnonymousUserEntityInput
+{
+	id : Long
+	isActive : Boolean
+}
+
+type Avatar
+{
+	id : Long
+	image : D3EImage
+	createFrom : String
+}
+
+input AvatarEntityInput
+{
+	id : Long
+	image : D3EImageEntityInput
+	createFrom : String
+}
+
+type D3EImage
+{
+	size : Long
+	width : Long
+	height : Long
+	file : DFile
+}
+
+input D3EImageEntityInput
+{
+	id : Long
+	size : Long
+	width : Long
+	height : Long
+	file : DFileEntityInput
+}
+
+type EmailMessage
+{
+	id : Long
+	from : String
+	to : [String]
+	bcc : [String]
+	cc : [String]
+	subject : String
+	html : Boolean
+	body : String
+	inlineAttachments : [DFile]
+	attachments : [DFile]
+	createdOn : LocalDateTime
+	status : EmailMessageStatus
+}
+
+input EmailMessageEntityInput
+{
+	id : Long
+	from : String
+	to : [String]
+	bcc : [String]
+	cc : [String]
+	subject : String
+	html : Boolean
+	body : String
+	inlineAttachments : [DFileEntityInput]
+	attachments : [DFileEntityInput]
+	createdOn : LocalDateTime
+	status : EmailMessageStatus
+}
+
+type OneTimePassword
+{
+	id : Long
+	success : Boolean
+	errorMsg : String
+	token : String
+	code : String
+	user : UserUnionX
+	expiry : LocalDateTime
+}
+
+input OneTimePasswordEntityInput
+{
+	id : Long
+	success : Boolean
+	errorMsg : String
+	token : String
+	code : String
+	user : ObjectRef
+	expiry : LocalDateTime
+}
+
+type ReportConfig
+{
+	id : Long
+	identity : String
+	values : [ReportConfigOption]
+}
+
+input ReportConfigEntityInput
+{
+	id : Long
+	identity : String
+	values : [ReportConfigOptionEntityInput]
+}
+
+type ReportConfigOption
+{
+	id : Long
+	identity : String
+	value : String
+}
+
+input ReportConfigOptionEntityInput
+{
+	id : Long
+	identity : String
+	value : String
+}
+
+input UserEntityInputUnionX
+{
+	type : String
+	valueAnonymousUser : AnonymousUserEntityInput
+}
+
+input UserEntityInput
+{
+	id : Long
+	isActive : Boolean
+}
+
+type UserSession
+{
+	id : Long
+	userSessionId : String
+}
+
+input UserSessionEntityInputUnionX
+{
+	type : String
+}
+
+input UserSessionEntityInput
+{
+	id : Long
+	userSessionId : String
+}
+
+enum MutateResultStatus {
+	Success
+	AuthFail
+	ValidationFail
+	BadRequest
+	ServerError
+}
+
+enum EmailMessageStatus {
+	Scheduled
+	Sending
+	Sent
+	Failed
+}
+
+enum ChangeEventType {
+	Insert
+	Update
+	Delete
+}
+
+enum SubscriptionChangeType {
+	All
+	Insert
+	Update
+	Delete
+}

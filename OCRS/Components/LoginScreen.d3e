@@ -1,0 +1,388 @@
+(Component LoginScreen{
+    properties[
+        (phonenumber{
+            type({
+                primitive String
+            })
+        })
+        (password{
+            type({
+                primitive String
+            })
+        })
+        (errorMessage {
+            type ({
+                primitive String
+            })
+            internal true
+        })
+        (showError {
+            type ({
+                primitive Boolean
+            })
+            defaultValue `false`
+            internal true
+        })
+        (hitRequest {
+            type ({
+                primitive Boolean
+            })
+            defaultValue `false`
+            internal true
+        })
+    ]
+    build(CRef center{
+        component #Center
+        child(CRef id{
+            component #SingleChildScrollView
+            data[
+                ({
+                    prop #padding
+                    type Compound
+                    compound ({
+                        struct #EdgeInsets
+                        values [
+                            ({
+                                prop #left
+                                value '40.0'
+                            })
+                            ({
+                                prop #right
+                                value '40.0'
+                            })
+                            ({
+                                prop #top
+                                value '40.0'
+                            })
+                            ({
+                                prop #bottom
+                                value '40.0'
+                            })
+                        ]
+                    })
+                })
+            ]
+            child(CRef id{
+                component #Column
+                data[
+                    ({
+                        prop #mainAxisAlignment
+                        value 'center'
+                    })
+                ]
+                children[
+                    (CRef phone{
+                        component #TextField
+                        data[
+                            ({
+                                prop #inputDecoration
+                                type Compound
+                                compound({
+                                    struct #InputDecoration
+                                    values[
+                                        ({
+                                            prop #labelText
+                                            value 'phonenumber'
+                                        })
+                                    ]
+                                })
+                            })
+                            ({
+                                prop #value
+                                type Bind
+                                bindTo `phonenumber`
+                            })
+                            ({
+                                event #onChanged
+                                type Bind
+                                bindTo `setSatePhoneNumber`
+                            })
+                            ({
+                                prop #constraints
+                                type Compound
+                                compound ({
+                                    struct #BoxConstraints
+                                    values [
+                                        ({
+                                            prop #minWidth
+                                            value '200'
+                                        })
+                                        ({
+                                            prop #maxWidth
+                                            value '400'
+                                        })
+                                    ]
+                                })
+                            })
+                        ]
+                    })
+                    (CRef password{
+                        component #TextField
+                        data[
+                            ({
+                                prop #inputDecoration
+                                type Compound
+                                compound({
+                                    struct #InputDecoration
+                                    values[
+                                        ({
+                                            prop #labelText
+                                            value 'password'
+                                        })
+                                    ]
+                                })
+                            })
+                            ({
+                                prop #value
+                                type Bind
+                                bindTo `password`
+                            })
+                            ({
+                                event #onChanged
+                                type Bind
+                                bindTo `setSatepassword`
+                            })
+                            ({
+                                prop #constraints
+                                type Compound
+                                compound ({
+                                    struct #BoxConstraints
+                                    values [
+                                        ({
+                                            prop #minWidth
+                                            value '200'
+                                        })
+                                        ({
+                                            prop #maxWidth
+                                            value '400'
+                                        })
+                                    ]
+                                })
+                            })
+                            ({
+                                prop #obscureText
+                                value 'true'
+                            })
+                        ]
+                    })
+                    (CIf errorMessage {
+                        condition `showError`
+                        then (CRef errorText {
+                            component #TextView
+                            data [
+                                ({
+                                    prop #data
+                                    type Bind
+                                    bindTo `errorMessage`
+                                })
+                                ({
+                                    prop #style
+                                    type Compound
+                                    compound ({
+                                        struct #TextStyle
+                                        values [
+                                            ({
+                                                prop #color
+                                                type Compound
+                                                compound ({
+                                                    struct #Color
+                                                    values [
+                                                        ({
+                                                            prop #alpha
+                                                            value '255'
+                                                        })
+                                                        ({
+                                                            prop #red
+                                                            value '255'
+                                                        })
+                                                        ({
+                                                            prop #green
+                                                            value '0'
+                                                        })
+                                                        ({
+                                                            prop #blue
+                                                            value '0'
+                                                        })
+                                                    ]
+                                                })
+                                            })
+                                        ]
+                                    })
+                                })
+                            ]
+                        })
+                    })
+                    (CIf id{
+                        condition `!hitRequest`
+                        then(CRef enable{
+                            component #RaisedButton
+                            data[
+                                ({
+                                    event #onPressed
+                                    type Bind
+                                    bindTo `() => authenticateUser`
+                                })
+                            ]
+                            child(CRef text{
+                                component #TextView
+                                data[
+                                    ({
+                                        prop #data
+                                        value 'Login'
+                                    })
+                                ]
+                            })
+                        })
+                        else(CRef disable {
+                            component #RaisedButton
+                            data [
+                                ({
+                                    event #onPressed
+                                    type Bind
+                                    bindTo `null`
+                                })
+                            ]
+                            child (CRef loadingIndicator {
+                                component #CircularProgressIndicator
+                            })
+                        })
+                    })
+                    (CRef id{
+                        component #Row
+                        data[
+                            ({
+                                prop #mainAxisAlignment
+                                value 'spaceEvenly'
+                            })
+                            ({
+                                prop #constraints
+                                type Compound 
+                                compound ({
+                                    struct #BoxConstraints
+                                    values[
+                                        ({
+                                            prop #minWidth
+                                            value '200'
+                                        })
+                                        ({
+                                            prop #maxWidth
+                                            value '400'
+                                        })
+                                    ]
+                                })
+                            })
+                        ]
+                        children[
+                            (CRef button1{
+                                component #RaisedButton
+                                data[
+                                    ({
+                                        event #onPressed
+                                        type Bind
+                                        bindTo `onForgetPassword`
+                                    })
+                                ]
+                                child(CRef text{
+                                    component #TextView
+                                    data[
+                                        ({
+                                            prop #data
+                                            value 'ForgetPassword'
+                                        })
+                                    ]
+                                })
+                            })
+                            (CRef padding{
+                                component #TextView
+                                data[
+                                    ({
+                                        prop #data
+                                        value '  '
+                                    })
+                                ]
+                            })
+                            (CRef button2{
+                                component #RaisedButton
+                                data[
+                                    ({
+                                        event #onPressed
+                                        type Bind
+                                        bindTo `onSignUp`
+                                    })
+                                ]
+                                child(CRef text2{
+                                    component #TextView
+                                    data[
+                                        ({
+                                            prop #data
+                                            value 'NewUser'
+                                        })
+                                    ]
+                                })
+                            })
+                        ]
+                    })
+                ]
+            })
+        })
+    })
+    events[
+        (onLogin {
+            
+        })
+        (onForgetPassword{
+
+        })
+        (onSignUp{
+            
+        })
+    ]
+    eventHandlers[
+        (setSatePhoneNumber{
+            params[
+                (data{
+                    type({
+                        primitive String
+                    })
+                })
+            ]
+            block ```
+            ```
+        })
+        (setSatepassword{
+            params[
+                (data{
+                    type({
+                        primitive String
+                    })
+                })
+            ]
+            block ```
+            ```
+        })
+        (authenticateUser {
+            params [
+                (text {
+                    type ({
+                        primitive String
+                    })
+                })
+            ]
+            block ```
+                this.hitRequest = true;
+                this.showError = false;
+                LoginResult loginResult = Query.loginCustomerTypeWithPhoneNumberAndPassword(
+                    phonenumber: this.phonenumber,
+                    password: this.password,
+                ).await;
+                if (loginResult.success) {
+                    this.onLogin(loginResult.userObject as Customer);
+                } else {
+                    this.errorMessage = loginResult.failureMessage;
+                    this.showError = true;
+                    this.hitRequest = false;
+                }
+            ```
+        })
+    ]
+})

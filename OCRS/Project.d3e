@@ -1,0 +1,20 @@
+(Project Project {
+    name 'D3E Studio'
+    multiUser true
+    package 'd3e.studio'
+    domain 'studio.d3e'
+    multiUserSettings ({
+        enableOpenId true
+        termsOfServiceUrl 'https://d3e.studio/terms'
+    })
+    modules [
+        'Design'
+        'Development'
+        'Document'
+        'Deployment'
+    ]
+    targets [
+        FlutterFrontEnd
+        JavaBackEnd
+    ]
+})
