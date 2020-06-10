@@ -1,0 +1,13 @@
+(UserType CustomerType{
+    userModel #Customer
+    modelAccess[
+        ({
+            model #SignUpRequest
+            create true
+        })
+    ]
+    loginSettings ({
+        phoneField #phonenumber
+
+    })
+})

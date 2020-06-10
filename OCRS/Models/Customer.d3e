@@ -1,11 +1,22 @@
 (Model Customer{
+    parent #User
     properties[
+        (name{
+            type({
+                primitive String
+            })
+        })
         (phonenumber{
             type({
                 primitive String
             })
         })
         (password {
+            type({
+                primitive String
+            })
+        })
+        (address {
             type({
                 primitive String
             })

@@ -1,0 +1,10 @@
+server class CustomerUtil {
+    static Customer createCustomer(SignUpRequest req) {
+        return Customer(
+                phonenumber: req.phonenumber,
+                password: req.password,
+                name: req.name,
+                address: req.address,
+            );
+    }
+}

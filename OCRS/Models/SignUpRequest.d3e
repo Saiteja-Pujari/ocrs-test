@@ -1,0 +1,59 @@
+(Model SignUpRequest {
+    properties[
+        (name{
+            type({
+                primitive String
+            })
+        })
+        (phonenumber {
+            type({
+                primitive String
+            })
+            required true
+        })
+        (address {
+            type({
+                primitive String
+            })
+        })
+        (password {
+            type({
+                primitive String
+            })
+            required true
+        })
+        (customer {
+            type ({
+                model #Customer
+            })
+        })
+        (reenterPassword {
+            type({
+                primitive String
+            })
+            required true
+            validations[
+                ({
+                    errorMsg 'Passwords Must Match'
+                    expression `it==this.password`
+                })
+            ]
+        })
+    ]
+    actions[
+        (DataAction createCustomer {
+            runOn OnCreate
+            forEach `[
+                this,
+            ]`
+            model #SignUpRequest
+            fields[
+                ({
+                    type SET
+                    field #customer
+                    value `CustomerUtil.createCustomer(it)`
+                })
+            ]
+        })
+    ]
+})
